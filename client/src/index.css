@@ -66,3 +66,13 @@ li{
   margin-top: 35px;
   margin-bottom: 35px;
 }
+
+.entry{
+  display: flex;
+}
+
+.entry-button{
+  height: 50px;
+  width: 70px;
+  margin: 2px;
+}

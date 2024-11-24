@@ -42,14 +42,6 @@ export default function Home () {
         }
     };
 
-    // const form = document.querySelector('form');
-
-    // form.addEventListener('keydown', function (event) {
-    //     if (event.keyCode === 13) {
-    //         // event.preventDefault();
-    //         form.submit();
-    //     }
-    // });
 
     return(
         <>
@@ -58,7 +50,12 @@ export default function Home () {
                 <div>
                     <ul>
                         {notes && notes.map((note) => (
-                            <li key={note._id}>{note.entry}</li>
+                            <div class="entry">
+                                <li key={note._id}>{note.entry}</li>
+                                <button class="entry-button">test1</button>
+                                <button class="entry-button">test2</button>
+                            </div>
+
                         ))}
                         
                     </ul>
