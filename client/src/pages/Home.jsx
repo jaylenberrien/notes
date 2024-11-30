@@ -1,10 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import ListItem from "../components/ListItem";
+// import ListItem from "../components/ListItem";
+// import Note from "../../../backend/Models/Notes";
 // import { response } from "express";
 
-export default function Home () {
+export default function Home ({Note}) {
 
 
     const [entry, setEntry] = useState("");
@@ -42,6 +43,13 @@ export default function Home () {
         }
     };
 
+    const deleteNote = async () =>{
+        id = {
+            entryId: Note._id
+        }
+        const deleteReq = await axios.delete('http://localhost:3000/notes/delete', id); 
+        console.log('sent req');
+    }
 
     return(
         <>
@@ -52,8 +60,7 @@ export default function Home () {
                         {notes && notes.map((note) => (
                             <div class="entry">
                                 <li key={note._id}>{note.entry}</li>
-                                <button class="entry-button">test1</button>
-                                <button class="entry-button">test2</button>
+                                <button class="entry-button" onClick={deleteNote}>test1</button>
                             </div>
 
                         ))}

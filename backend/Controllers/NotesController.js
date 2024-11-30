@@ -15,15 +15,27 @@ const createNote = async(req, res) =>{
 
 const getNotes = async (req, res) =>{
     try{
-        const notes = await Note.find({}).sort({createdAt: -1})
-        res.status(200).json(notes)
+        const notes = await Note.find({}).sort({createdAt: -1});
+        res.status(200).json(notes);
     }catch (error){
-        res.status(400).json({error: error.message})
+        res.status(400).json({error: error.message});
     }
 
 }
 
+
+const deleteNote = async (req, res) =>{
+    try{
+        const result = await Note.findByIdAndDelete(req.body.entryId);
+        res.status(200).json("Deleted");
+    }catch(error){
+        res.status(400).json({error: error.message});
+    }
+}
+
 module.exports = {
+    deleteNote,
     createNote,
     getNotes,
+   
 }
