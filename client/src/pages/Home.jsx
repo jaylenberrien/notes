@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 // import Note from "../../../backend/Models/Notes";
 // import { response } from "express";
 
-export default function Home ({Note}) {
+export default function Home () {
 
 
     const [entry, setEntry] = useState("");
@@ -43,12 +43,14 @@ export default function Home ({Note}) {
         }
     };
 
-    const deleteNote = async () =>{
-        id = {
-            entryId: Note._id
+    const deleteNote = async (note) =>{
+        const id = {
+            entryId: note._id
         }
-        const deleteReq = await axios.delete('http://localhost:3000/notes/delete', id); 
+        const deleteReq = await axios.delete(`http://localhost:3000/notes/delete`, id); 
         console.log('sent req');
+        console.log(deleteReq); 
+        console.log(id);
     }
 
     return(
@@ -60,7 +62,7 @@ export default function Home ({Note}) {
                         {notes && notes.map((note) => (
                             <div class="entry">
                                 <li key={note._id}>{note.entry}</li>
-                                <button class="entry-button" onClick={deleteNote}>test1</button>
+                                <button class="entry-button" onClick={() => deleteNote(note._id)}>test1</button>
                             </div>
 
                         ))}

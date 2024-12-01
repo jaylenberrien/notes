@@ -1,13 +1,24 @@
 const Note = require('../Models/Notes');
 
+
+const removeNote = async (req, res) =>{
+    try{
+        const result = await Note.findByIdAndDelete(req.body.entryId);
+        res.status(200).json(result);
+    }catch(error){
+        res.status(400).json({error: error.message});
+    }
+}
+
+
 const createNote = async(req, res) =>{
     const {entry} = req.body 
     
     try{
-        const createdEntry = await Note.createNote(entry)
-        res.status(200).json({entry: createdEntry})
+        const createdEntry = await Note.createNote(entry);
+        res.status(200).json({entry: createdEntry});
     }catch (error){
-        res.status(400).json({ error: error.message })
+        res.status(400).json({ error: error.message });
     }
 
 }
@@ -24,17 +35,10 @@ const getNotes = async (req, res) =>{
 }
 
 
-const deleteNote = async (req, res) =>{
-    try{
-        const result = await Note.findByIdAndDelete(req.body.entryId);
-        res.status(200).json("Deleted");
-    }catch(error){
-        res.status(400).json({error: error.message});
-    }
-}
+
 
 module.exports = {
-    deleteNote,
+    removeNote,
     createNote,
     getNotes,
    

@@ -18,4 +18,5 @@ notesSchema.statics.createNote = async function (entry){
 
 
 const Note = mongoose.model('Notes', notesSchema)
+
 module.exports = Note;
