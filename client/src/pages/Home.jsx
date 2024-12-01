@@ -24,7 +24,7 @@ export default function Home () {
         }
 
         fetchNotes()
-    },[])
+    },[notes])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -43,13 +43,17 @@ export default function Home () {
         }
     };
 
-    const deleteNote = async (note) =>{
+    const deleteNote = async (idStore) =>{
         const id = {
-            entryId: note._id
-        }
-        const deleteReq = await axios.delete(`http://localhost:3000/notes/delete`, id); 
-        console.log('sent req');
-        console.log(deleteReq); 
+            entryId: idStore
+        };
+        const deleteReq = await axios.delete(`http://localhost:3000/notes/delete`, 
+            
+            {
+                 data:  {entryId: idStore} 
+            });
+
+        console.log(deleteReq.data); 
         console.log(id);
     }
 
@@ -58,12 +62,15 @@ export default function Home () {
             <div className="main-container">
                 <h2>Notes for later</h2>
                 <div>
-                    <ul>
+                    <ul class="entries">
                         {notes && notes.map((note) => (
-                            <div class="entry">
-                                <li key={note._id}>{note.entry}</li>
-                                <button class="entry-button" onClick={() => deleteNote(note._id)}>test1</button>
-                            </div>
+                            <>
+                                <div class="entry">
+                                    <li key={note._id}>{note.entry}</li>
+                                    <button class="entry" id="entry-button" onClick={() => {const idStore = note._id; deleteNote(idStore)}}>delete</button>
+                                </div>
+                                
+                             </>
 
                         ))}
                         
@@ -72,7 +79,7 @@ export default function Home () {
                 </div>
                 <div>
                     <form onSubmit={handleSubmit}>
-                        <textarea className="input" type="text" value={entry} onChange={(e) => handlechange(e.target.value)} />
+                        <input className="input" type="text" value={entry} onChange={(e) => handlechange(e.target.value)} />
                         <button>Add</button>
                     </form>
 

@@ -2,8 +2,9 @@ const Note = require('../Models/Notes');
 
 
 const removeNote = async (req, res) =>{
+    const {entryId} = req.body;
     try{
-        const result = await Note.findByIdAndDelete(req.body.entryId);
+        const result = await Note.findByIdAndDelete(entryId);
         res.status(200).json(result);
     }catch(error){
         res.status(400).json({error: error.message});
@@ -12,7 +13,7 @@ const removeNote = async (req, res) =>{
 
 
 const createNote = async(req, res) =>{
-    const {entry} = req.body 
+    const {entry} = req.body
     
     try{
         const createdEntry = await Note.createNote(entry);
@@ -26,7 +27,7 @@ const createNote = async(req, res) =>{
 
 const getNotes = async (req, res) =>{
     try{
-        const notes = await Note.find({}).sort({createdAt: -1});
+        const notes = await Note.find({}).sort({createdAt: 1});
         res.status(200).json(notes);
     }catch (error){
         res.status(400).json({error: error.message});
