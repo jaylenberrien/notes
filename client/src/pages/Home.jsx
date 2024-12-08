@@ -17,14 +17,15 @@ export default function Home () {
 
     const [notes, setNotes] = useState([])
 
+    const fetchNotes = async () =>{
+        const response = await axios.get('http://localhost:3000/notes/notes')
+        setNotes(response.data)
+     }
+   
     useEffect(() =>{
-        const fetchNotes = async () =>{
-           const response = await axios.get('http://localhost:3000/notes/notes')
-           setNotes(response.data)
-        }
 
         fetchNotes()
-    },[notes])
+    },[])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,6 +56,8 @@ export default function Home () {
 
         console.log(deleteReq.data); 
         console.log(id);
+        // window.location.reload();
+        fetchNotes();
     }
 
     return(

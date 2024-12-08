@@ -1,4 +1,4 @@
- const express = require('express');
+const express = require('express');
 const methodOverride = require('method-override');
 const mongoConfig = require('./config');
 const cors = require('cors');
@@ -10,7 +10,7 @@ const notesRouter = require('./Routes/NotesRoutes')
 require('dotenv').config()
 
 app.use(cors({
-    origin: 'http://localhost:5174',
+    origin: 'http://localhost:5173',
     methods: 'GET, HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 200,
