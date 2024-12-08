@@ -10,7 +10,14 @@ const notesRouter = require('./Routes/NotesRoutes')
 require('dotenv').config()
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: [
+        'http://localhost:5173',
+        'http://localhost:5174',
+        'https://jaylenberrien.github.io',
+        'https://jaylenberrien.github.io/notes',
+        'notes-production-9ca7.up.railway.app'
+
+    ],
     methods: 'GET, HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 200,
